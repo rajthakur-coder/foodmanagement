@@ -1,0 +1,552 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+}
+
+
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* Force Dark Sidebar (independent of theme) */
+/* 
+.sidebar-dark {
+  @apply bg-gray-800 text-gray-300 !important;
+}
+
+.sidebar-dark .sidebar-item {
+  @apply text-gray-300 hover:bg-gray-800;
+}
+
+.sidebar-dark .sidebar-item-active {
+  background: rgba(var(--primary-rgb), 0.25) !important;
+  color: var(--primary) !important;
+}
+
+.sidebar-dark .sidebar-submenu {
+  @apply text-gray-300 bg-gray-900 shadow-xl rounded-xl;
+}
+
+.sidebar-dark .sidebar-submenu-header {
+  @apply text-gray-300;
+}
+
+.sidebar-dark .sidebar-submenu-item {
+  @apply text-gray-300 transition-all duration-200 bg-gray-900;
+}
+
+.sidebar-dark .sidebar-submenu-item:hover {
+  @apply bg-gray-800;
+}
+
+.sidebar-dark .sidebar-submenu-item-active,
+.sidebar-dark .sidebar-submenu-item-clicked {
+  @apply text-gray-300 bg-gray-800;
+}
+
+.sidebar-header-dark {
+  @apply text-gray-300 bg-gray-900;
+}
+
+.sidebar-header-dark span {
+  @apply text-gray-300;
+}
+
+.sidebar-header {
+  @apply text-gray-300 !important;
+} */
+
+
+
+.css-dam8fe-MuiPickersInputBase-root-MuiPickersOutlinedInput-root {
+  border-radius: 8px !important;
+  border: 0.1px solid transparent;
+  width: 170px !important;
+}
+
+.css-gy5nvb-MuiPickersInputBase-root-MuiPickersOutlinedInput-root {
+  border-radius: 8px !important;
+  border: 0.1px solid transparent;
+  width: 170px !important;
+
+}
+
+
+.css-11rbwhu-MuiTypography-root-MuiDayCalendar-weekDayLabel {
+  font-size: 14px !important;
+  height: 29px;
+  font-weight: 700 !important;
+}
+
+.css-1rl1vrc-MuiDayCalendar-header {
+  border-bottom: 2px solid #ccc;
+  margin: 0 14px;
+
+}
+
+.css-1y6aexk-MuiTypography-root-MuiDayCalendar-weekDayLabel {
+  font-size: 14px !important;
+  height: 29px;
+  font-weight: 700 !important;
+
+}
+
+.css-13r221k-MuiFormLabel-root-MuiInputLabel-root {
+  line-height: 2 !important;
+}
+
+.css-gy5nvb-MuiPickersInputBase-root-MuiPickersOutlinedInput-root.Mui-focused {
+  border-color: white;
+}
+
+.css-1oyagq0-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
+  color: #D1D5D8 !important;
+  background-color: #1F2937 !important;
+  border: 8px !important;
+  margin-top: 1px;
+
+}
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 640px) {
+
+  /* DatePicker input box full width */
+  .css-dam8fe-MuiPickersInputBase-root-MuiPickersOutlinedInput-root,
+  .css-gy5nvb-MuiPickersInputBase-root-MuiPickersOutlinedInput-root {
+    width: 100% !important;
+    font-size: 14px !important;
+  }
+
+  /* Calendar header spacing */
+  .css-1rl1vrc-MuiDayCalendar-header {
+    margin: 0 8px;
+  }
+
+  /* Weekday labels smaller */
+  .css-11rbwhu-MuiTypography-root-MuiDayCalendar-weekDayLabel,
+  .css-1y6aexk-MuiTypography-root-MuiDayCalendar-weekDayLabel {
+    font-size: 12px !important;
+    height: 26px;
+  }
+
+  /* Label spacing fix */
+  .css-13r221k-MuiFormLabel-root-MuiInputLabel-root {
+    line-height: 1.5 !important;
+  }
+
+  /* Calendar popup padding */
+  .MuiPickersPopper-root {
+    padding: 0 6px !important;
+  }
+}
+
+
+
+
+
+/* Neon Rotate Animation */
+@keyframes neon-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Wrapper */
+.rotating-neon-wrapper {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;            /* FIX: Mobile overflow control */
+  transform-style: preserve-3d;
+  padding: 1px;
+  clip-path: inset(0 round 1rem);   /* FIX: Neon stays inside */
+}
+
+/* Mobile + Tablet (0-1023px) */
+.rotating-neon-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: -8%;                   /* Stable around card */
+  width: 116%;
+  height: 116%;
+  border-radius: inherit;
+  background: conic-gradient(
+    #FF69B4 0deg 10deg,
+    #DA70D6 10deg 20deg,
+    #1E90FF 8deg 20deg,
+    transparent 30deg 360deg
+  );
+  animation: neon-spin 12s linear infinite;
+  filter: blur(5px);
+  z-index: 0;
+}
+
+/* Desktop (1024px+) */
+@media (min-width: 1024px) {
+  .rotating-neon-wrapper {
+    overflow: visible;          /* Desktop mai free glow */
+    clip-path: none;            /* Glow can go outside */
+  }
+
+  .rotating-neon-wrapper::before {
+    inset: -30%;
+    width: 160%;
+    height: 160%;
+    filter: blur(8px);
+  }
+}
+
+/* Inner Card */
+.rotating-neon-card {
+  position: relative;
+  z-index: 10;
+  border-radius: inherit;
+  padding: 2rem;
+  background: #fff;
+}
+
+
+
+.custom-c-curve {
+  border-top-left-radius: none !important;
+  border-bottom-left-radius: 9999px !important;
+}
+
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #FFFFFF inset !important;
+  -webkit-text-fill-color: #111827 !important;
+  caret-color: #111827 !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+input:-moz-autofill {
+  box-shadow: 0 0 0px 1000px #FFFFFF inset !important;
+  -moz-text-fill-color: #111827 !important;
+}
+
+
+
+/*  Remove default eye icon in Chrome/Edge/Opera for password fields */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear,
+input[type="password"]::-webkit-credentials-auto-fill-button,
+input[type="password"]::-webkit-textfield-decoration-container,
+input[type="password"]::-webkit-textfield-decoration-button,
+input[type="password"]::-webkit-password-toggle {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  appearance: none !important;
+}
+
+/* For Safari (optional but useful) */
+input[type="password"]::-webkit-textfield-decoration-container {
+  display: none !important;
+}
+
+/* styles.css */
+.faster-slideInRight {
+  --animate-duration: 0.5s;
+  /* animation-timing-function: ease-out; */
+}
+
+.faster-slideInLeft {
+  --animate-duration: 0.2s;
+  /* animation-timing-function: ease-in;  */
+}
+
+
+
+
+
+/* Add this new block to your global CSS file */
+
+
+
+@layer components {
+  .table-header {
+    /* Consistent header cell styling */
+    @apply px-5 py-5 font-semibold text-left text-text-subtle text-md whitespace-nowrap;
+  }
+
+  .table-data {
+    /* Main table cell styling */
+    @apply pt-3 pb-3 pl-5 font-medium break-words align-middle text-md text-text-subtle;
+  }
+
+
+
+  /* Optional: Fixed-width classes for specific columns */
+  .col-name {
+    @apply max-w-[200px] truncate;
+    /* Shorten long text with ellipsis */
+  }
+
+  .col-slug {
+    @apply max-w-[180px] break-words;
+    /* Wrap slug to next line */
+  }
+
+  .col-created {
+    @apply whitespace-nowrap;
+    /* Keep date and time on one line each */
+  }
+
+  .col-status {
+    @apply w-[140px] text-center;
+  }
+
+  .col-action {
+    @apply w-[150px] text-center;
+  }
+}
+
+
+
+
+
+
+.flip-container {
+  perspective: 1000px;
+  /* 3D depth */
+  transform-style: preserve-3d;
+}
+
+/* Animate.css-like classes with full 180 flip */
+.animate__flipInYRight {
+  animation: flipInYRight var(--animate-duration, 0.3s) ease both;
+}
+
+.animate__flipOutYRight {
+  animation: flipOutYRight var(--animate-duration, 0.3s) ease both;
+}
+
+.animate__flipInYLeft {
+  animation: flipInYLeft var(--animate-duration, 0.3s) ease both;
+}
+
+.animate__flipOutYLeft {
+  animation: flipOutYLeft var(--animate-duration, 0.3s) ease both;
+}
+
+/* Keyframes for full 180° flip */
+
+/* SignUp: flip in from right */
+@keyframes flipInYRight {
+  0% {
+    transform: perspective(1000px) rotateY(180deg);
+    opacity: 0;
+  }
+
+  100% {
+    transform: perspective(1000px) rotateY(0deg);
+    opacity: 1;
+  }
+}
+
+/* SignUp: flip out to right */
+@keyframes flipOutYRight {
+  0% {
+    transform: perspective(1000px) rotateY(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: perspective(1000px) rotateY(-180deg);
+    opacity: 0;
+  }
+}
+
+/* SignIn: flip in from left */
+@keyframes flipInYLeft {
+  0% {
+    transform: perspective(1000px) rotateY(-180deg);
+    opacity: 0;
+  }
+
+  100% {
+    transform: perspective(1000px) rotateY(0deg);
+    opacity: 1;
+  }
+}
+
+/* SignIn: flip out to left */
+@keyframes flipOutYLeft {
+  0% {
+    transform: perspective(1000px) rotateY(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: perspective(1000px) rotateY(180deg);
+    opacity: 0;
+  }
+}
+
+
+/* === Bounce Dots Loader Animation === */
+.loader {
+  width: 38px;
+  aspect-ratio: 2;
+  --_g: no-repeat radial-gradient(circle closest-side, white 90%, #0000);
+  background:
+    var(--_g) 0% 50%,
+    var(--_g) 50% 50%,
+    var(--_g) 100% 50%;
+  background-size: calc(100% / 3) 50%;
+  animation: l3 1s infinite linear;
+}
+
+@keyframes l3 {
+  20% {
+    background-position: 0% 0%, 50% 50%, 100% 50%;
+  }
+
+  40% {
+    background-position: 0% 100%, 50% 0%, 100% 50%;
+  }
+
+  60% {
+    background-position: 0% 50%, 50% 100%, 100% 0%;
+  }
+
+  80% {
+    background-position: 0% 50%, 50% 50%, 100% 100%;
+  }
+}
+
+
+
+
+
+
+
+
+/*  MDEDITOR css Code */
+
+.w-md-editor-text-input {
+  caret-color: #000 !important;
+  overflow: visible !important;
+  line-height: 1.5 !important;
+}
+
+
+.editor-paragraph {
+  @apply mb-2;
+}
+
+
+/* ============================= */
+/* 🎀 Ribbon Card Design */
+/* ============================= */
+/* 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.card {
+  position: relative;
+  color: #434343;
+  border-radius: 1rem;
+  background: white;
+  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.card .card__container {
+  padding: 1.75rem;
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+  background: white;
+  position: relative;
+}
+
+.card .card__header {
+  margin-bottom: 0.75rem;
+}
+
+.card .card__body {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.card::before {
+  position: absolute;
+  top: 30px;
+  right: -10px;
+  content: "";
+  background: #283593;
+  height: 28px;
+  width: 28px;
+  transform: rotate(45deg);
+  z-index: 0;
+}
+
+.card::after {
+  position: absolute;
+  content: attr(data-label);
+  top: 11px;
+  right: -17px;
+  padding: 0.4rem 0.5rem;
+  width: 7rem;
+  background: #3949ab;
+  color: white;
+  text-align: center;
+  font-size: 0.85rem;
+  box-shadow: 4px 4px 15px rgba(26, 35, 126, 0.2);
+  z-index: 11;
+}
+
+@media (max-width: 1024px) and (min-width: 1023px) {
+
+  .card .card__header,
+  .card .card__body {
+    margin: 15px;
+  }
+}
+
+
+@media (max-width: 320px) and (min-width: 323px) {
+  .card .card__header,
+  .card .card__body {
+    margin: 10px;
+  }
+}
+
+
+
+
+
+
+
+
+ */

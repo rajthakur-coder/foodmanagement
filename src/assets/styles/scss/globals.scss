@@ -1,0 +1,632 @@
+// //  Tailwind Imports
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+:root {
+  /* Brand Colors */
+  --color-primary: theme(colors.indigo.600);
+  --color-primary-rgb: 79, 70, 229;
+  --color-lights: theme(colors.indigo.200);
+  --preloader-outer: theme(colors.indigo.200);
+  --preloader-inner: theme(colors.indigo.300);
+  --color-secondary: theme(colors.indigo.900);
+  --color-success: theme(colors.green.600);
+  --color-warning: theme(colors.yellow.500);
+  --color-danger: theme(colors.red.500);
+  --color-info: theme(colors.blue.500);
+  --color-dark: theme(colors.gray.900);
+
+
+
+
+  --font-size-base-xxs: 0.625rem;
+  /* New 10px for text-xxs */
+  --font-size-base-xs: 0.75rem;
+  /* 12px for text-xs */
+  --font-size-base-sm: 0.875rem;
+  /* 14px for text-sm */
+  --font-size-base-md: 0.9375rem;
+  /* 15px for text-md */
+  --font-size-base-lg: 1.125rem;
+  /* 18px for text-lg */
+  --font-size-base-xl: 1.25rem;
+  /* New 20px for text-xl */
+  --font-size-base-2xl: 1.5rem;
+  /* New 24px for text-2xl */
+
+  /* Line Heights (aap inko bhi customize kar sakte hain) */
+  --line-height-base-xs: 1.125rem;
+  --line-height-base-md: 1.5rem;
+  --line-height-base-xl: 1.75rem;
+  --line-height-base-2xl: 2rem;
+
+
+  /* Backgrounds / Surfaces */
+  --card-bg: theme(colors.white);
+  --body-bg: theme(colors.gray.100);
+  --table-header-bg: theme(colors.gray.50);
+  --hover-bg: theme(colors.gray.100);
+  --active-bg: theme(colors.gray.100);
+
+  /* Text Colors */
+  --text-primary: theme(colors.gray.600);
+  --text-secondary: theme(colors.gray.900);
+  
+  --text-link: theme(colors.blue.600);
+
+  /* Borders */
+  --border-default: theme(colors.gray.200);
+  --border-input: theme(colors.gray.400);
+  --border-input-hover: theme(colors.gray.800);
+  --border-input-focus: theme(colors.blue.500);
+
+  /* Action States */
+  --color-danger-hover-bg: rgba(231, 211, 207, 0.5);
+
+  /* Badges / Status */
+  --badge-success-bg: theme(colors.green.100);
+  --badge-success-text: theme(colors.green.800);
+  --badge-warning-bg: theme(colors.yellow.100);
+  --badge-warning-text: theme(colors.yellow.700);
+  --badge-danger-bg: theme(colors.red.100);
+  --badge-danger-text: theme(colors.red.900);
+  --badge-neutral-bg: theme(colors.gray.200);
+  --badge-neutral-text: theme(colors.gray.500);
+
+  /* Scrollbar */
+  --scrollbar-thumb: rgba(112, 105, 105, 0.2);
+  --scrollbar-thumb-hover: rgba(0, 0, 0, 0.4);
+
+
+  /* Unchecked Checkbox Border Color */
+  --color-checkbox-bg: #FFFFFF;
+  --color-checkbox-border: #D1D5DB;
+}
+
+/* ===========================
+   DARK MODE
+=========================== */
+.dark {
+  --color-primary: theme(colors.indigo.500);
+  --color-primary-rgb: 129, 140, 248;
+  --preloader-outer: theme(colors.indigo.700);
+  --preloader-inner: theme(colors.indigo.900);
+
+  --card-bg: theme(colors.gray.800);
+  --body-bg: theme(colors.gray.900);
+  --table-header-bg: theme(colors.gray.700);
+  --hover-bg: theme(colors.gray.700);
+  --active-bg: theme(colors.gray.800);
+
+  --text-primary: theme(colors.gray.100);
+  --text-secondary: theme(colors.gray.400);
+  --text-tertiary: theme(colors.gray.500);
+  --text-link: theme(colors.blue.400);
+
+  --border-default: theme(colors.gray.700);
+  --border-input: theme(colors.gray.500);
+  --border-input-hover: theme(colors.white);
+  --border-input-focus: theme(colors.white);
+
+  --color-danger-hover-bg: rgba(76, 50, 45, 0.5);
+
+  --badge-success-bg: theme(colors.green.900);
+  --badge-success-text: theme(colors.green.400);
+  --badge-warning-bg: theme(colors.yellow.900);
+  --badge-warning-text: theme(colors.yellow.400);
+  --badge-danger-bg: theme(colors.red.900);
+  --badge-danger-text: theme(colors.orange.300);
+  --badge-neutral-bg: theme(colors.gray.700);
+  --badge-neutral-text: theme(colors.gray.100);
+
+  --scrollbar-thumb: rgba(255, 255, 255, 0.4);
+  --scrollbar-thumb-hover: rgba(255, 255, 255, 0.4);
+}
+
+/* ===========================
+   THEME VARIANTS
+=========================== */
+[data-theme="red"] {
+  --color-primary: theme(colors.red.500);
+  --color-primary-rgb: 239, 68, 68;
+  --color-lights: theme(colors.red.100);
+  --preloader-outer: theme(colors.red.100);
+  --preloader-inner: theme(colors.red.200);
+}
+
+[data-theme="green"] {
+  --color-primary: theme(colors.green.500);
+  --color-primary-rgb: 34, 197, 94;
+  --color-lights: theme(colors.green.100);
+  --preloader-outer: theme(colors.green.300);
+  --preloader-inner: theme(colors.green.400);
+}
+
+[data-theme="yellow"] {
+  --color-primary: theme(colors.yellow.500);
+  --color-primary-rgb: 250, 204, 21;
+  --color-lights: theme(colors.yellow.100);
+  --preloader-outer: theme(colors.yellow.300);
+  --preloader-inner: theme(colors.yellow.400);
+}
+
+[data-theme="purple"] {
+  --color-primary: theme(colors.purple.500);
+  --color-primary-rgb: 139, 92, 246;
+  --color-lights: theme(colors.purple.100);
+  --preloader-outer: theme(colors.purple.300);
+  --preloader-inner: theme(colors.purple.400);
+}
+
+[data-theme="orange"] {
+  --color-primary: theme(colors.orange.500);
+  --color-primary-rgb: 249, 115, 22;
+  --color-lights: theme(colors.orange.100);
+  --preloader-outer: theme(colors.orange.300);
+  --preloader-inner: theme(colors.orange.400);
+}
+
+/* ===========================
+   DARK MODE THEME OVERRIDES
+=========================== */
+.dark[data-theme="green"] {
+  --preloader-outer: theme(colors.green.500);
+  --preloader-inner: theme(colors.green.400);
+}
+
+.dark[data-theme="red"] {
+  --preloader-outer: theme(colors.red.800);
+  --preloader-inner: theme(colors.red.700);
+}
+
+.dark[data-theme="yellow"] {
+  --preloader-outer: theme(colors.yellow.500);
+  --preloader-inner: theme(colors.yellow.400);
+}
+
+.dark[data-theme="purple"] {
+  --preloader-outer: theme(colors.purple.500);
+  --preloader-inner: theme(colors.purple.400);
+}
+
+.dark[data-theme="orange"] {
+  --preloader-outer: theme(colors.orange.500);
+  --preloader-inner: theme(colors.orange.400);
+}
+
+
+
+
+/* Base body */
+body {
+  font-family: "Public Sans", sans-serif !important;
+  @apply bg-surface-body text-text-main dark:bg-surface-card dark:text-text-main;
+}
+
+.number {
+  font-family: "Barlow", monospace;
+}
+
+
+// NProgress (top loading bar)
+#nprogress .bar {
+  background: var(--color-primary);
+  height: 5px;
+  z-index: 20001;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px var(--color-primary), 0 0 5px var(--color-primary);
+}
+
+#nprogress .spinner {
+  display: none !important;
+}
+
+
+// Ripple Effect (for buttons & sidebar)
+@keyframes ripple-circle {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+[data-ripple] {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(128, 128, 128, 0.3);
+  transform: scale(0);
+  animation: ripple-circle 600ms linear;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.dark .ripple-circle {
+  background: rgba(128, 128, 128, 0.4);
+}
+
+
+
+.order-item-active {
+  background: (var(--color-lights));
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.dark .order-item-active {
+  background: (var(--color-lights));
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+
+
+
+// Sidebar Styles
+.sidebar {
+  @apply h-screen shadow-lg;
+  background-color: var(--card-bg);
+}
+
+.sidebar-scroll::-webkit-scrollbar-button:single-button {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.sidebar-item {
+  @apply relative overflow-hidden w-full flex items-center transition-all duration-200 rounded-lg;
+}
+
+.sidebar-item-active {
+  background-color: rgba(var(--color-primary-rgb), 0.15);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.dark .sidebar-item-active {
+  background-color: rgba(var(--color-primary-rgb), 0.25);
+  color: var(--color-primary);
+}
+
+.sidebar-submenu-item-clicked {
+  @apply font-semibold;
+  background-color: var(--hover-bg);
+  color: var(--text-primary);
+}
+
+
+//  Topbar / Navbar Styles
+.topbar {
+  @apply fixed top-0 right-0 z-40 flex items-center justify-between h-16 px-6 transition-all duration-300 ease-in-out;
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+}
+
+.topbar-scrolled {
+  @apply backdrop-blur-md shadow-lg shadow-blue-500/10 border;
+  background-color: rgba(var(--color-primary-rgb), 0.08);
+  border-color: var(--border-default);
+}
+
+.topbar-default {
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+}
+
+.topbar-avatar {
+  @apply rounded-full w-9 h-9 border-2;
+  border-color: var(--color-primary);
+}
+
+
+
+/* Always visible scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 10px;
+  height: 9px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Completely hidden */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Sidebar scrollbar arrow buttons hide karne ke liye */
+.sidebar-scroll::-webkit-scrollbar-button {
+  display: none;
+}
+
+.scrollbar-hidden::-webkit-scrollbar-thumb {
+  background: transparent;
+  transition: background 0.3s ease;
+
+}
+
+.scrollbar-hidden.show-scroll::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+
+
+}
+
+.scrollbar-hidden {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  transition: scrollbar-color 0.3s ease;
+  border-radius: 4px;
+}
+
+.scrollbar-hidden.show-scroll {
+  scrollbar-color: var(--scrollbar-thumb) transparent;
+
+}
+
+
+// Animations
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Conditional Scrollbar: only visible on overflow */
+.conditional-scrollbar {
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) transparent;
+}
+
+/* Webkit browsers */
+.conditional-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.conditional-scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb);
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+.conditional-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-thumb-hover);
+}
+
+.conditional-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
+
+// Reusable Button Styles
+.btn-custom {
+  @apply px-4 py-2 rounded-lg transition;
+  background-color: var(--color-primary);
+  color: var(--text-on-primary);
+}
+
+.btn-custom:hover {
+  opacity: 0.9;
+}
+
+
+
+
+
+
+/* Force Dark Sidebar (independent of theme) */
+
+//  .sidebar-dark {
+//   @apply bg-gray-900 text-gray-300 !important;
+// }
+
+// .sidebar-dark .sidebar-item {
+//   @apply text-gray-300 hover:bg-gray-800;
+// }
+
+// .sidebar-dark .sidebar-item-active {
+//   background: rgba(var(  --color-primary-rgb), 0.25) !important;
+//   color: var(--color-primary) !important;
+// }
+
+// .sidebar-dark .sidebar-submenu {
+//   @apply text-gray-300 bg-gray-900 shadow-xl rounded-xl;
+// }
+
+// .sidebar-dark .sidebar-submenu-header {
+//   @apply text-gray-300;
+// }
+
+// .sidebar-dark .sidebar-submenu-item {
+//   @apply text-gray-300 transition-all duration-200 bg-gray-900;
+// }
+
+// .sidebar-dark .sidebar-submenu-item:hover {
+//   @apply bg-gray-800;
+// }
+
+// .sidebar-dark .sidebar-submenu-item-active,
+// .sidebar-dark .sidebar-submenu-item-clicked {
+//   @apply text-gray-300 bg-gray-800;
+// }
+
+// .sidebar-header-dark {
+//   @apply text-gray-300 bg-gray-900;
+// }
+
+// .sidebar-header-dark span {
+//   @apply text-gray-300;
+// }
+
+// .sidebar-header {
+//   @apply text-gray-300 !important;
+// } 
+
+
+
+
+
+
+
+/* Keyframes */
+@keyframes spin-forward {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-reverse {
+  0% {
+    transform: rotate(360deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes rotate-once {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-once-reverse {
+  0% {
+    transform: rotate(360deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes morph-to-circle {
+  0% {
+    border-radius: 1.5rem;
+  }
+
+  100% {
+    border-radius: 50%;
+  }
+}
+
+@keyframes zoom-in-out {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.3);
+  }
+}
+
+@keyframes zoom-out-in {
+
+  0%,
+  100% {
+    transform: scale(1.3);
+  }
+
+  50% {
+    transform: scale(1);
+  }
+}
+
+@keyframes morph-square-circle {
+
+  0%,
+  100% {
+    border-radius: 1.5rem;
+  }
+
+  50% {
+    border-radius: 50%;
+  }
+}
+
+/* Tailwind utilities */
+@layer utilities {
+  .animate-spin-slow {
+    animation: spin-forward 0.9s linear infinite;
+  }
+
+  .animate-spin-reverse {
+    animation: spin-reverse 0.9s linear infinite;
+  }
+
+  .animate-rotate-once {
+    animation: rotate-once 0.9s linear forwards;
+  }
+
+  .animate-rotate-once-reverse {
+    animation: rotate-once-reverse 0.9s linear forwards;
+  }
+
+  .animate-morph-to-circle {
+    animation: morph-to-circle 1s ease-in-out forwards;
+  }
+
+  .animate-zoom-in-out {
+    animation: zoom-in-out 1.5s ease-in-out forwards;
+  }
+
+  .animate-zoom-out-in {
+    animation: zoom-out-in 1.5s ease-in-out forwards;
+  }
+
+  /* Loop phase: square ↔ circle + rotation */
+  .animate-square-loop {
+    animation: morph-square-circle 2s ease-in-out infinite alternate,
+      spin-forward 1.5s linear infinite;
+  }
+
+  .animate-square-loop-reverse {
+    animation: morph-square-circle 2s ease-in-out infinite alternate,
+      spin-reverse 1.5s linear infinite;
+  }
+
+}
+

@@ -1,0 +1,68 @@
+// {
+//   "compilerOptions": {
+//     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+//     "target": "ES2023",
+//     "lib": ["ES2023"],
+//     "module": "ESNext",
+//     "skipLibCheck": true,
+
+//     /* Bundler mode */
+//     "moduleResolution": "bundler",
+//     "allowImportingTsExtensions": true,
+//     "verbatimModuleSyntax": true,
+//     "moduleDetection": "force",
+//     "noEmit": true,
+
+//     /* Linting */
+//     "strict": true,
+//     "noUnusedLocals": true,
+//     "noUnusedParameters": true,
+//     "erasableSyntaxOnly": true,
+//     "noFallthroughCasesInSwitch": true,
+//     "noUncheckedSideEffectImports": true
+//   },
+//   "include": ["vite.config.ts"]
+// }
+
+
+
+
+
+
+
+
+{
+  "compilerOptions": {
+    /* Output Info */
+    "target": "ES2023",
+    "lib": ["DOM", "DOM.Iterable", "ES2023"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+
+    /* React support */
+    "jsx": "react-jsx",
+    "types": ["react", "react-dom", "node"],
+
+    /* Linting & Strictness */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
+  },
+  "include": [
+    "src",
+    "vite.config.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
