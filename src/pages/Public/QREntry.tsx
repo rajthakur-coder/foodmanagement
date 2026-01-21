@@ -20,8 +20,9 @@ const QREntry = () => {
     sessionStorage.setItem("user_type", "Guest");
 
     // ✅ MENU PAGE
+  setTimeout(() => {
     navigate("/menu", { replace: true });
-  }, [params, navigate]);
+  }, 1);  }, [params, navigate]);
 
   return (
     <div className="flex items-center justify-center h-screen">

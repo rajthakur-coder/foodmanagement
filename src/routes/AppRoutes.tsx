@@ -177,14 +177,7 @@ const AppRoutes: React.FC = () => {
             </PageWrapper>
           }
         />
-            <Route
-              path="/menu"
-              element={
-                <PageWrapper title="Menu">
-                  <Menu />
-                </PageWrapper>
-              }
-            />
+
         <Route
           path="/error/404"
           element={
@@ -200,7 +193,15 @@ const AppRoutes: React.FC = () => {
           <Route path="/" element={<RoleHomeRedirect />} />
 
           {/* ---------- Guest & User Routes ---------- */}
-   
+          <Route element={<RoleBasedRoute allowedRoles={["Guest"]} />}>
+            <Route
+              path="/menu"
+              element={
+                <PageWrapper title="Menu">
+                  <Menu />
+                </PageWrapper>
+              }
+            />
 
             <Route
               path="/cart"
