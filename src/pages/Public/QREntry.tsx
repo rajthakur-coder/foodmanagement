@@ -8,18 +8,22 @@ const QREntry = () => {
   useEffect(() => {
     const restaurantId = params.get("restaurant_id");
     const tableId = params.get("table_id");
+    console.log("QR ENTRY PARAMS", restaurantId, tableId);
+
 
     if (!restaurantId || !tableId) {
       navigate("/error/404", { replace: true });
       return;
     }
 
-    // ✅ SESSION STORE
+
+    //SESSION STORE
     sessionStorage.setItem("restaurant_id", restaurantId);
     sessionStorage.setItem("table_id", tableId);
     sessionStorage.setItem("user_type", "Guest");
 
-    // ✅ MENU PAGE
+   
+    //MENU PAGE
 requestAnimationFrame(() => {
   navigate("/menu", { replace: true });
 });
