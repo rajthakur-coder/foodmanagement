@@ -297,6 +297,8 @@ useEffect(() => {
             itemImage={selectedItem.item_icon}
             itemPriceFull={Number(selectedItem.max_price ?? selectedItem.min_price)}
             itemPriceHalf={Number(selectedItem.min_price ?? selectedItem.max_price)}
+  itemVariants={selectedItem.variants} // ✅ pass variants
+
           />
         )}
       </div>

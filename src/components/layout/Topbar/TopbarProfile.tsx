@@ -2,6 +2,10 @@ import { useState, useRef, useEffect, MouseEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import clsx from "clsx";
+import defaultAvatar from "../../../assets/Images/avator.jfif";
+// ya relative path:
+// import defaultAvatar from "../../assets/images/default-avatar.png";
+
 import { motion, AnimatePresence } from "framer-motion";
 import {
   FiUser,
@@ -49,7 +53,7 @@ const TopbarProfile = () => {
 
   // Guest or User role fallback
   const userRole = user?.role || sessionStorage.getItem("user_type"); // "Guest" fallback
-  const PROFILE_PAGE_ROUTE = "/profile";
+  // const PROFILE_PAGE_ROUTE = "/profile";
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -91,15 +95,14 @@ const TopbarProfile = () => {
   };
 
   // Dropdown items
-  const items: DropdownItem[] = [
-    { label: "Profile", icon: <FiUser />, onClick: () => navigate(PROFILE_PAGE_ROUTE) },
+  // const items: DropdownItem[] = [
+  //   // { label: "Profile", icon: <FiUser />, onClick: () => navigate(PROFILE_PAGE_ROUTE) },
   
-    { label: "Lock screen", icon: <FiLock />, onClick: () => {} },
-    // ✅ Logout only for User or PlatformAdmin
-    ...(userRole !== "Guest"
-      ? [{ label: "Logout", icon: <FiLogOut />, onClick: () => setLogoutModalOpen(true) }]
-      : []),
-  ];
+  //   // ✅ Logout only for User or PlatformAdmin
+  //   ...(userRole !== "Guest"
+  //     ? [{ label: "Logout", icon: <FiLogOut />, onClick: () => setLogoutModalOpen(true) }]
+  //     : []),
+  // ];
 
   return (
     <>
@@ -114,11 +117,12 @@ const TopbarProfile = () => {
                 "hover:scale-105 active:scale-95 hover:bg-gray-800"
               )}
             >
-              <img
-                src={user?.avatar || "https://randomuser.me/api/portraits/women/68.jpg"}
-                alt="profile"
-                className="object-cover w-full h-full"
-              />
+            <img
+  src={user?.avatar || defaultAvatar}
+  alt="User Avatar"
+  className="w-10 h-10 rounded-full object-cover"
+/>
+
             </div>
             <div className="hidden md:block">
               <h4 className="text-sm font-medium text-text-main">{user?.name || "Guest User"}</h4>
@@ -127,7 +131,7 @@ const TopbarProfile = () => {
           </div>
         </div>
 
-        {/* Dropdown Menu */}
+        {/* Dropdown Menu
         <AnimatePresence>
           {isDropdownOpen && (
             <motion.div
@@ -159,7 +163,7 @@ const TopbarProfile = () => {
               ))}
             </motion.div>
           )}
-        </AnimatePresence>
+        </AnimatePresence> */}
       </div>
 
       {/* Logout Modal */}

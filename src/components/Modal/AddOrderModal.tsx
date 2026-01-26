@@ -12,6 +12,8 @@ interface ItemSuccessModalProps {
   itemPriceHalf: number;
   itemId: string;
   itemImage?: string;
+    itemVariants: { variant_id: number; portion_type: "Half" | "Full"; price: number }[];
+
 }
 
 const ItemSuccessModal: React.FC<ItemSuccessModalProps> = ({
@@ -22,6 +24,7 @@ const ItemSuccessModal: React.FC<ItemSuccessModalProps> = ({
   itemPriceHalf,
   itemId,
   itemImage,
+    itemVariants,
 }) => {
   const [quantity, setQuantity] = useState(1);
   const [selectedPortion, setSelectedPortion] =
@@ -38,23 +41,40 @@ const ItemSuccessModal: React.FC<ItemSuccessModalProps> = ({
     }
   }, [isOpen]);
 
-  const price =
-    selectedPortion === "full" ? itemPriceFull : itemPriceHalf;
+  // const price =
+  //   selectedPortion === "full" ? itemPriceFull : itemPriceHalf;
 
-  const addItem = () => {
-    dispatch(
-      addToOrders({
-        id: itemId,
-        name: itemName,
-        price,
-        quantity,
-        portion: selectedPortion,
-        image: itemImage,
-        description: "",
-      })
-    );
-    toggle();
-  };
+const addItem = () => {
+  if (!itemVariants || itemVariants.length === 0) return;
+
+  // portion ke hisaab se variant select karo
+  const selectedVariant = itemVariants.find(
+    (v) =>
+      (selectedPortion === "full" && v.portion_type.toLowerCase() === "full") ||
+      (selectedPortion === "half" && v.portion_type.toLowerCase() === "half")
+  );
+
+  if (!selectedVariant) {
+    console.error("Variant not found for selected portion!");
+    return;
+  }
+
+  dispatch(
+    addToOrders({
+      id: itemId,
+      variantId: selectedVariant.variant_id, // ✅ variantId from backend
+      name: itemName,
+      price: selectedVariant.price,
+      quantity,
+      portion: selectedPortion,
+      image: itemImage,
+      description: "",
+    })
+  );
+
+  toggle();
+};
+
 
   return (
   <BaseModal isOpen={isOpen} toggle={toggle} headerText="Add To Cart">

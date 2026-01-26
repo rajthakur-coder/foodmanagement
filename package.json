@@ -55,6 +55,7 @@
     "remixicon": "^4.6.0",
     "reselect": "^5.1.1",
     "simplebar-react": "^3.3.2",
+    "socket.io-client": "^4.8.3",
     "sonner": "^2.0.7"
   },
   "devDependencies": {

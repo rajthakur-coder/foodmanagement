@@ -13,7 +13,7 @@ export const sidebarSections = [
     
       {
         name: "Cart",
-        path: "cart",
+        path: "/cart",
         icon: <Icon name="ri-shopping-cart-2-fill" />,
         roles: [  'Guest'], // Guest added
       },
