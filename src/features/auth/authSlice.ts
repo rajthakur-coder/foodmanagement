@@ -35,7 +35,7 @@ export interface LoginPayload {
 }
 
 // --- Load initial state from storage ---
-const storedToken: string | null = Cookies.get("token") || null;
+const storedToken: string | null = Cookies.get("customertoken") || null;
 
 interface StoredAuthData {
   user: User;
@@ -100,7 +100,7 @@ const authSlice = createSlice({
       state.isGlobalLoggingOut = false;
       state.expiresAt = null;
 
-      Cookies.remove("token");
+  Cookies.remove("customertoken"); // ✅ correct cookie name
       localStorage.removeItem("authUser");
       localStorage.setItem("logout", Date.now().toString());
     },

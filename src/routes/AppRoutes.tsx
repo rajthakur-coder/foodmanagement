@@ -230,8 +230,6 @@
 // export default AppRoutes;
 
 
-
-
 import React, { lazy, Suspense } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 
@@ -277,6 +275,8 @@ const AppRoutes: React.FC = () => {
             </PageWrapper>
           }
         />
+        {/* Catch-all for QR entry → stay on /qr-entry */}
+        <Route path="/qr-entry/*" element={<Navigate to="/qr-entry" replace />} />
 
         <Route
           path="/auth/customer/login"
@@ -286,41 +286,34 @@ const AppRoutes: React.FC = () => {
             </PageWrapper>
           }
         />
-
-        <Route
-          path="/error/404"
-          element={
-            <PageWrapper title="Unauthorized">
-              <UnauthorizedPage />
-            </PageWrapper>
-          }
-        />
+        {/* Catch-all for login → stay on /auth/customer/login */}
+        <Route path="/auth/customer/login/*" element={<Navigate to="/auth/customer/login" replace />} />
 
         {/* ---------- Protected Routes ---------- */}
         <Route element={<LayoutWrapper />}>
-          {/* Role based home redirect */}
+          {/* Role-based home redirect */}
           <Route path="/" element={<RoleHomeRedirect />} />
 
-          {/* ---------- Guest Routes ---------- */}
+          {/* Guest Routes */}
+          <Route
+            path="/menu"
+            element={
+              <PageWrapper title="Menu">
+                <Menu />
+              </PageWrapper>
+            }
+          />
+
+          <Route
+            path="/cart"
+            element={
+              <PageWrapper title="Cart">
+                <AddToCart />
+              </PageWrapper>
+            }
+          />
+
           <Route element={<RoleBasedRoute allowedRoles={["Guest"]} />}>
-            <Route
-              path="/menu"
-              element={
-                <PageWrapper title="Menu">
-                  <Menu />
-                </PageWrapper>
-              }
-            />
-
-            <Route
-              path="/cart"
-              element={
-                <PageWrapper title="Cart">
-                  <AddToCart />
-                </PageWrapper>
-              }
-            />
-
             <Route
               path="/myOrder"
               element={
@@ -330,10 +323,10 @@ const AppRoutes: React.FC = () => {
               }
             />
           </Route>
-        </Route>
 
-        {/* ---------- Catch All ---------- */}
-        <Route path="*" element={<Navigate to="/error/404" replace />} />
+          {/* Catch-all for PROTECTED routes → redirect to /menu */}
+          <Route path="*" element={<Navigate to="/menu" replace />} />
+        </Route>
       </Routes>
     </Suspense>
   );

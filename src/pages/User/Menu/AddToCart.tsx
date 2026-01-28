@@ -68,7 +68,7 @@ const OrderPage: React.FC = () => {
 
   /* ================= PLACE ORDER ================= */
   const handlePlaceOrderClick = () => {
-    const token = Cookies.get("token");
+    const token = Cookies.get("customertoken");
     if (!token) {
       sessionStorage.setItem("post_login_redirect", location.pathname);
       navigate("/auth/customer/login", { replace: true });

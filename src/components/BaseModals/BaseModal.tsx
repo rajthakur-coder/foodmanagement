@@ -446,13 +446,13 @@ const BaseModal = ({
 
           {/* ---------- FOOTER (STICKY) ---------- */}
           {(onCancel || onConfirm || extraButton) && (
-            <div className="sticky bottom-0 bg-white dark:bg-gray-800 border-t">
+            <div className="sticky bottom-0 bg-white dark:bg-gray-800 ">
               <div className="flex justify-end gap-3 p-4">
                 {onCancel && (
                   <button
                     onClick={onCancel}
                     className={clsx(
-                      "px-4 py-2 text-xs font-semibold rounded-full",
+                      "px-4 py-2 text-xs font-semibold rounded-lg",
                       cancelColor
                     )}
                     disabled={isLoading}
@@ -466,7 +466,7 @@ const BaseModal = ({
                     onClick={extraButton.onClick}
                     disabled={extraButton.disabled || isLoading}
                     className={clsx(
-                      "px-4 py-2 text-xs font-semibold rounded-full",
+                      "px-4 py-2 text-xs font-semibold rounded-lg",
                       extraButton.colorClass ||
                         "bg-gray-200 hover:bg-gray-300"
                     )}
@@ -480,7 +480,7 @@ const BaseModal = ({
                     onClick={onConfirm}
                     disabled={isLoading}
                     className={clsx(
-                      "px-5 py-2 text-xs font-semibold rounded-full",
+                      "px-5 py-2 text-xs font-semibold rounded-lg",
                       confirmColor,
                       isLoading && "opacity-60 cursor-not-allowed"
                     )}

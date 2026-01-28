@@ -40,7 +40,7 @@ export const useTokenExpiryCheck = (): void => {
 
     const performLogout = useCallback((): void => {
         dispatch(logout());
-        navigate('/auth/login', { replace: true });
+        navigate('/auth/customer/login', { replace: true });
     }, [dispatch, navigate]);
 
     useEffect(() => {

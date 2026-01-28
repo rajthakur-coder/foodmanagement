@@ -35,7 +35,7 @@ const SidebarItem: FC<SidebarItemProps> = ({
   const [activeChild, setActiveChild] = useState<string | null>(null);
   const currentPath = window.location.pathname;
 
-const token = Cookies.get("token"); 
+const token = Cookies.get("customertoken"); 
   const isProtected = item.name === "My Orders"; // Protected page
   const isDisabled = isProtected && !token;
 

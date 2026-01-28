@@ -20,7 +20,7 @@ const QREntry = () => {
     //SESSION STORE
     sessionStorage.setItem("restaurant_id", restaurantId);
     sessionStorage.setItem("table_id", tableId);
-    sessionStorage.setItem("user_type", "Guest");
+    // sessionStorage.setItem("user_type", "Guest");
 
    
     //MENU PAGE

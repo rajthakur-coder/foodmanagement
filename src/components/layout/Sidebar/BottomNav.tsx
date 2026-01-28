@@ -10,7 +10,7 @@ const BottomNav = () => {
   const activePath = location.pathname;
 
   const flatItems = sidebarSections.flatMap((s) => s.items);
-  const token = Cookies.get("token"); // cookie se token
+  const token = Cookies.get("customertoken"); // cookie se token
 
   return (
     // Show only on small/medium screens, hide on lg+

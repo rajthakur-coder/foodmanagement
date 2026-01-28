@@ -33,7 +33,7 @@ const LogoutModal: React.FC<LogoutModalProps> = ({
       confirmText="Logout"
       cancelText="Cancel"
       confirmColor="bg-red-600 text-white"
-      widthClass="w-[450px]"
+      widthClass="w-[420px]"
       isLoading={isLoading} // loader now works
     >
       <LogoutContentModal

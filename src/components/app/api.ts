@@ -9,7 +9,7 @@ import type { RootState } from "../../components/app/store";
 const rawBaseQuery = fetchBaseQuery({
   baseUrl: import.meta.env.VITE_API_URL as string,
   prepareHeaders: (headers, { getState }) => {
-    const token = Cookies.get("token");
+    const token = Cookies.get("customertoken");
     if (token) {
       headers.set("Authorization", `Bearer ${token}`);
     }
@@ -35,7 +35,7 @@ export const appBaseQuery: BaseQueryFn<
 
     // Trigger logout and redirect
     api.dispatch(logout());
-    window.location.href = "/login";
+    window.location.href = "/auth/customer/login";
   }
 
   return result;

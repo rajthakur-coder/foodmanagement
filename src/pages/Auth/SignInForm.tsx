@@ -296,7 +296,7 @@ const finalizeLogin = (
   const expiryDate = new Date(Date.now() + durationMs);
 
   // ================= SAVE TOKEN =================
-  Cookies.set("token", token, {
+  Cookies.set("customertoken", token, {
     expires: expiryDate,
     secure: true,
     sameSite: "Strict",
@@ -317,7 +317,7 @@ const finalizeLogin = (
   setCurrentView("form");
 
   // ================= GUEST SESSION =================
-  sessionStorage.setItem("user_type", "Guest");
+//   sessionStorage.setItem("user_type", "Guest");
 
   // ================= POST LOGIN REDIRECT =================
   const redirectPath =

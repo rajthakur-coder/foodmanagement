@@ -30,7 +30,7 @@ const AuthListener: React.FC = () => {
                 localStorage.removeItem('logout');
 
                 // 3. Redirect to login
-                navigate('/auth/login', { replace: true });
+                navigate('/auth/customer/login', { replace: true });
             }
         };
 

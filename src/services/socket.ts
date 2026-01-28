@@ -5,7 +5,7 @@ let socket: Socket | null = null;
 
 export const connectSocket = () => {
   if (!socket) {
-    const token = Cookies.get("token");
+    const token = Cookies.get("customertoken");
 
     socket = io(import.meta.env.VITE_SOCKET_URLS, {
       transports: ["websocket"],
