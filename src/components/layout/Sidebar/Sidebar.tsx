@@ -90,7 +90,7 @@ const MemoizedSidebarItem = memo(SidebarItem);
 // -------------------- Helper Function --------------------
 const hasAccess = (item: SidebarItemType, userRole: string | null | undefined): boolean => {
   if (!item.roles || item.roles.length === 0) return true; // No role = accessible
-  if (!userRole) return false;
+  if (!userRole) return true;
   return item.roles.includes(userRole);
 };
 
@@ -107,7 +107,7 @@ const Sidebar = ({
   // Fetch user role from Redux OR fallback to sessionStorage for QR guests
   const reduxRole = useSelector((state: RootState) => state.auth.user?.role);
   // const guestRole = sessionStorage.getItem("user_type"); // "Guest" for QR
-  const userRole = reduxRole || null;
+  const userRole = reduxRole || "custom";
 
   const [filteredSections, setFilteredSections] = useState<SidebarSectionType[]>([]);
 
