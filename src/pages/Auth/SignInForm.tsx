@@ -95,6 +95,13 @@ const [showVerificationModal, setShowVerificationModal] = useState(false);
  const [sendOtpApi, { isLoading: isSendingOtp }] = useSendOtpMutation();
     const [verifyOtpApi, { isLoading: isVerifyingOtp }] = useVerifyOtpMutation();
     const [registerUserApi, { isLoading: isRegisteringUser }] = useRegisterUserWithTokenMutation();
+const [location, setLocation] = useState<{
+  latitude: number | null;
+  longitude: number | null;
+}>({
+  latitude: null,
+  longitude: null,
+});
 
 
     const navigate = useNavigate();
@@ -428,6 +435,241 @@ const finalizeLogin = (
         }
     };
 
+
+
+
+//     useEffect(() => {
+//   const getLocationOnLoad = async () => {
+//     try {
+//       // permission check
+//       const permissionStatus = await navigator.permissions.query({
+//         name: "geolocation",
+//       });
+
+//       if (permissionStatus.state === "denied") {
+//         ToasterUtils.error(
+//           "Location access denied. Please enable location to login."
+//         );
+//         return;
+//       }
+
+//       const position: GeolocationPosition =
+//         await new Promise<GeolocationPosition>((resolve, reject) =>
+//           navigator.geolocation.getCurrentPosition(resolve, reject, {
+//             timeout: 10000,
+//             enableHighAccuracy: false,
+//           })
+//         );
+
+//       setLocation({
+//         latitude: position.coords.latitude,
+//         longitude: position.coords.longitude,
+//       });
+//     } catch (err) {
+//       console.error("Location error:", err);
+//     }
+//   };
+
+//   getLocationOnLoad();
+// }, []);
+
+
+
+
+
+
+
+
+//     const handleSubmit = async (e: FormEvent): Promise<void> => {
+//         e.preventDefault();
+
+//         // Validate form
+//         const currentErrors: FormErrors<SignInFormData | SignUpFormData> = isSignUp
+//             ? validateSignUp(signUpData)
+//             : validateSignIn(signInData);
+//         const hasErrors: boolean = Object.keys(currentErrors).length > 0;
+
+//         if (hasErrors) {
+//             if (isSignUp) {
+//                 setSignUpErrors(currentErrors as FormErrors<SignUpFormData>);
+//                 setSignUpTouched({ name: true, username: true, password: true });
+//             } else {
+//                 setSignInErrors(currentErrors as FormErrors<SignInFormData>);
+//                 setSignInTouched({ username: true, password: true });
+//             }
+//             ToasterUtils.error("Please fill in all required fields.");
+//             return;
+//         }
+
+//         if (isSignUp) {
+//             setLoading(true);
+//             // Ensure you have all necessary data for Sign Up and OTP sending
+//             const currentErrors = validateSignUp(signUpData);
+//             if (Object.keys(currentErrors).length > 0) {
+//                 setSignUpErrors(currentErrors as FormErrors<SignUpFormData>);
+//                 setSignUpTouched({ name: true, mobile: true, email: true, password: true }); // Assuming these fields are now in signUpData
+//                 ToasterUtils.error("Please fill in all required fields for Sign Up.");
+//                 setLoading(false);
+//                 return;
+//             }
+//             try {
+//                 const otpPayload: SendOtpRequest = {
+//                     mobile_no: signUpData.mobile,
+//                 };
+//                 const response: any = await sendOtpApi(otpPayload).unwrap();
+
+//                 if (response.success) {
+//                     setOtpFlowType("signup");
+//                     setOtpContact(signUpData.mobile);
+//                     setCurrentView("otp");
+//                     ToasterUtils.success(response.message || "OTP sent for registration verification.");
+//                 } else {
+//                     ToasterUtils.error(response.message || "Failed to send OTP for registration.");
+//                 }
+
+//             } catch (err: any) {
+//                 const errorMessage = err?.data?.message || err.message || "Sign Up failed: Failed to send OTP.";
+//                 ToasterUtils.error(errorMessage);
+//                 dispatch(setError(errorMessage));
+//             } finally {
+//                 setLoading(false);
+//             }
+//             return;
+//         }
+
+//         setLoading(true);
+//         dispatch(loginStart());
+
+//         try {
+         
+
+//             // Step 3: Call login API
+//           if (!location.latitude || !location.longitude) {
+//   ToasterUtils.error("Location not available. Please allow location access.");
+//   setLoading(false);
+//   return;
+// }
+
+// const response: LoginResponseData = await loginApi({
+//   username: signInData.username,
+//   password: signInData.password,
+//   latitude: location.latitude,
+//   longitude: location.longitude,
+// }).unwrap();
+
+
+//             if (response.success && response.statusCode === 5) {
+//                 // OTP required
+//               const tempUserData = {
+//   username: signInData.username,
+//   password: signInData.password,
+//   latitude: location.latitude,
+//   longitude: location.longitude,
+//   user: response.data?.user as User,
+//   expires_at: response.data?.expires_at as string,
+// };
+
+//                 localStorage.setItem("tempUser", JSON.stringify(tempUserData));
+
+//                 setOtpFlowType("signin");
+//                 setOtpContact(
+//                     response.data?.mobile || response.data?.username || signInData.username
+//                 );
+//                 setCurrentView("otp");
+//                 ToasterUtils.info(response.message || "OTP sent for verification.");
+//             } else if (response.success && response.statusCode === 1) {
+//                 if (!response.data?.token || !response.data?.user || !response.data?.expires_at) {
+//                     throw new Error("Missing required login data in successful response.");
+//                 }
+//                 finalizeLogin(response.data.token, response.data.user, response.data.expires_at);
+//                 ToasterUtils.success(response.message || "Login successful!");
+//             } else {
+//                 ToasterUtils.error(response.message || "Login failed");
+//             }
+//         } catch (err: any) {
+//     let errorMessage = "Login failed";
+
+//     // GeoLocation deny
+//     if (err.code === 1) {
+//         errorMessage = "Location access denied. Please enable location in your browser settings.";
+//     }
+//     // RTK Query backend error
+//     else if (err?.data?.message) {
+//         errorMessage = err.data.message;  // backend ka message
+//     }
+//     // Fallback: RTK Query error string
+//     else if (err?.error) {
+//         errorMessage = err.error;
+//     }
+
+//     ToasterUtils.error(errorMessage);
+//     dispatch(setError(errorMessage));
+// }
+//  finally {
+//             setLoading(false);
+//         }
+//     };
+
+
+
+
+
+
+
+
+
+const DUMMY_LOCATION = {
+  latitude: 28.6139,   // New Delhi
+  longitude: 77.2090,
+};
+
+
+useEffect(() => {
+  const getLocationOnLoad = async () => {
+    try {
+      const permissionStatus = await navigator.permissions.query({
+        name: "geolocation",
+      });
+
+      if (permissionStatus.state === "denied") {
+        ToasterUtils.warning(
+          "Location access denied. Using default location."
+        );
+
+        // ✅ dummy location set
+        setLocation(DUMMY_LOCATION);
+        return;
+      }
+
+      const position: GeolocationPosition =
+        await new Promise((resolve, reject) =>
+          navigator.geolocation.getCurrentPosition(resolve, reject, {
+            timeout: 10000,
+            enableHighAccuracy: false,
+          })
+        );
+
+      setLocation({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+      });
+    } catch (err) {
+      console.error("Location error:", err);
+
+      // ✅ error me bhi dummy
+      setLocation(DUMMY_LOCATION);
+    }
+  };
+
+  getLocationOnLoad();
+}, []);
+
+
+
+
+
+
+
     const handleSubmit = async (e: FormEvent): Promise<void> => {
         e.preventDefault();
 
@@ -489,46 +731,36 @@ const finalizeLogin = (
         dispatch(loginStart());
 
         try {
-            // Step 1: Check location permission status before requesting
-            const permissionStatus = await navigator.permissions.query({ name: "geolocation" });
-
-            // CASE 1: PERMANENTLY DENIED
-            // If state is 'denied', throw a custom error. This error will be caught below.
-            if (permissionStatus.state === "denied") {
-                throw new Error(
-                    "Location access denied. Please enable location in your browser settings to login."
-                );
-            }
-
-            // Step 2: Request location (browser will show prompt if state === "prompt")
-            const position: GeolocationPosition = await new Promise<GeolocationPosition>(
-                (resolve, reject) =>
-                    navigator.geolocation.getCurrentPosition(resolve, reject, {
-                        timeout: 10000,
-                        enableHighAccuracy: false,
-                    })
-            );
-
-            const { latitude, longitude } = position.coords;
+         
 
             // Step 3: Call login API
-            const response: LoginResponseData = await loginApi({
-                username: signInData.username,
-                password: signInData.password,
-                latitude,
-                longitude,
-            }).unwrap();
+const finalLocation = {
+  latitude: location.latitude || DUMMY_LOCATION.latitude,
+  longitude: location.longitude || DUMMY_LOCATION.longitude,
+};
+
+
+const response: LoginResponseData = await loginApi({
+  username: signInData.username,
+  password: signInData.password,
+  latitude: finalLocation.latitude,
+  longitude: finalLocation.longitude,
+}).unwrap();
+
+
 
             if (response.success && response.statusCode === 5) {
                 // OTP required
-                const tempUserData = {
-                    username: signInData.username,
-                    password: signInData.password,
-                    latitude,
-                    longitude,
-                    user: response.data?.user as User,
-                    expires_at: response.data?.expires_at as string,
-                };
+const tempUserData = {
+  username: signInData.username,
+  password: signInData.password,
+  latitude: finalLocation.latitude,
+  longitude: finalLocation.longitude,
+  user: response.data?.user as User,
+  expires_at: response.data?.expires_at as string,
+};
+
+
                 localStorage.setItem("tempUser", JSON.stringify(tempUserData));
 
                 setOtpFlowType("signin");
@@ -569,6 +801,15 @@ const finalizeLogin = (
             setLoading(false);
         }
     };
+
+
+
+
+
+
+
+
+
 
 
     

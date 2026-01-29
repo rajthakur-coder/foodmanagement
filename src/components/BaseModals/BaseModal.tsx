@@ -476,17 +476,22 @@ const BaseModal = ({
                 )}
 
                 {onConfirm && (
-                  <button
-                    onClick={onConfirm}
-                    disabled={isLoading}
-                    className={clsx(
-                      "px-5 py-2 text-xs font-semibold rounded-lg",
-                      confirmColor,
-                      isLoading && "opacity-60 cursor-not-allowed"
-                    )}
-                  >
-                    {confirmText}
-                  </button>
+                <button
+  onClick={onConfirm}
+  disabled={isLoading}
+  className={clsx(
+    "px-5 py-2 text-xs font-semibold rounded-lg flex items-center justify-center",
+    confirmColor,
+    isLoading && "cursor-not-allowed opacity-80"
+  )}
+>
+  {isLoading ? (
+    <div className="loader" />
+  ) : (
+    confirmText
+  )}
+</button>
+
                 )}
               </div>
             </div>

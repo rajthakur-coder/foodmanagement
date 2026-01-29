@@ -243,9 +243,7 @@ import PageWrapper from "../components/Common/TitleManager";
 import LayoutWrapper from "../components/layout/LayoutWrapper";
 
 /* ---------- Lazy Pages ---------- */
-const UnauthorizedPage = lazy(
-  () => import("../pages/Auth/UnauthorizedPage")
-);
+
 const SignInForm = lazy(
   () => import("../pages/Auth/SignInForm")
 );
