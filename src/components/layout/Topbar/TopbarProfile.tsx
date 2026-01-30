@@ -193,20 +193,18 @@
 
 
 
-
 import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import clsx from "clsx";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiUser, FiLogOut } from "react-icons/fi";
+import { FiUser, FiLogOut, FiLogIn } from "react-icons/fi"; // FiLogIn add kiya
 import LogoutModal from "../../Modal/LogoutModal";
 import { useLogoutMutation } from "../../../features/auth/authApi";
 import { logout } from "../../../features/auth/authSlice";
 import { ToasterUtils } from "../../ui/toast";
 import defaultAvatar from "../../../assets/Images/avator.jfif";
 import Cookies from "js-cookie";
-
 
 // Types
 interface User {
@@ -234,14 +232,14 @@ const TopbarProfile = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const user = useSelector((state: RootState) => state.auth.user);
-const token =
-  useSelector((state: RootState) => state.auth.token) ||
-  Cookies.get("customertoken");
-
+  const token =
+    useSelector((state: RootState) => state.auth.token) ||
+    Cookies.get("customertoken");
 
   const [logoutApi] = useLogoutMutation();
 
   const PROFILE_PAGE_ROUTE = "/profile";
+  const LOGIN_PAGE_ROUTE = "/auth/customer/login"; // Login route define kiya
 
   // ✅ Outside click close dropdown
   useEffect(() => {
@@ -269,7 +267,7 @@ const token =
       if (response.success) {
         ToasterUtils.success(response.message || "Logout successful");
         dispatch(logout());
-        navigate("/auth/customer/login", { replace: true });
+        navigate(LOGIN_PAGE_ROUTE, { replace: true });
       }
     } catch (err: any) {
       const errorMessage =
@@ -281,22 +279,25 @@ const token =
     }
   };
 
-  // ✅ Dropdown items (Logout only if token exists)
+  // ✅ Dropdown items logic
   const items = [
     {
       label: "Profile",
       icon: <FiUser />,
       onClick: () => navigate(PROFILE_PAGE_ROUTE),
     },
-    ...(token
-      ? [
-          {
-            label: "Logout",
-            icon: <FiLogOut />,
-            onClick: () => setLogoutModalOpen(true),
-          },
-        ]
-      : []),
+    // Agar token hai to Logout dikhao, nahi to Login dikhao
+    token
+      ? {
+          label: "Logout",
+          icon: <FiLogOut />,
+          onClick: () => setLogoutModalOpen(true),
+        }
+      : {
+          label: "Login",
+          icon: <FiLogIn />,
+          onClick: () => navigate(LOGIN_PAGE_ROUTE),
+        },
   ];
 
   return (
@@ -322,10 +323,10 @@ const token =
 
           <div className="hidden md:block">
             <h4 className="text-sm font-medium text-text-main">
-              {user?.name || "User"}
+              {user?.name || (token ? "User" : "Guest")}
             </h4>
             <p className="text-xs text-gray-500">
-              {user?.role || "Member"}
+              {user?.role || (token ? "Member" : "Welcome")}
             </p>
           </div>
         </div>
@@ -350,6 +351,8 @@ const token =
                     "flex items-center gap-2 px-4 py-2 rounded-md cursor-pointer transition text-sm",
                     item.label === "Logout"
                       ? "text-red-600 hover:bg-red-50"
+                      : item.label === "Login"
+                      ? "text-primary hover:bg-primary/10 font-bold"
                       : "text-text-text hover:bg-surface-hover"
                   )}
                 >

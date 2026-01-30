@@ -6,61 +6,33 @@ import { addNotification } from "../features/notification/notificationSlice";
 
 export const useCustomerSocket = () => {
   const dispatch = useDispatch();
-
-  // 🔊 Audio refs (important)
-  const audioMapRef = useRef<Record<string, HTMLAudioElement>>({});
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const audioUnlockedRef = useRef(false);
 
-  const soundMap: Record<string, string> = {
-    confirmed: "/sounds/pendng.wav",
-    preparing: "/sounds/cooking.wav",
-    readyforpickup: "/sounds/served.wav",
-    completed: "/sounds/served.wav",
-    default: "/sounds/notification.wav",
+  // Single Sound Path
+  const NOTIFICATION_SOUND = "/sounds/notification.wav";
+
+  // Is function ko hum Component se call karwayenge user interaction ke liye
+  const unlockAudio = () => {
+    if (audioUnlockedRef.current) return;
+    
+    const audio = new Audio(NOTIFICATION_SOUND);
+    audio.muted = true;
+    audio.play().then(() => {
+      audio.pause();
+      audio.currentTime = 0;
+      audio.muted = false;
+      audioRef.current = audio;
+      audioUnlockedRef.current = true;
+      console.log("🔓 Audio unlocked via Component");
+    }).catch(err => console.error("Audio unlock failed", err));
   };
 
-  // 🔓 Unlock audio on first user interaction (mobile fix)
-  useEffect(() => {
-    const unlockAudio = () => {
-      if (audioUnlockedRef.current) return;
-
-      Object.values(soundMap).forEach((path) => {
-        const audio = new Audio(path);
-        audio.muted = true;
-        audio.play().then(() => {
-          audio.pause();
-          audio.currentTime = 0;
-          audio.muted = false;
-        });
-        audioMapRef.current[path] = audio;
-      });
-
-      audioUnlockedRef.current = true;
-      console.log("🔓 Audio unlocked for mobile");
-    };
-
-    document.addEventListener("click", unlockAudio, { once: true });
-    document.addEventListener("touchstart", unlockAudio, { once: true });
-
-    return () => {
-      document.removeEventListener("click", unlockAudio);
-      document.removeEventListener("touchstart", unlockAudio);
-    };
-  }, []);
-
-  const playStatusSound = (status: string) => {
-    if (!audioUnlockedRef.current) return; // 🚫 mobile safety
-
-    const cleanStatus = status ? status.toLowerCase() : "default";
-    const soundPath = soundMap[cleanStatus] || soundMap.default;
-
-    const audio = audioMapRef.current[soundPath];
-    if (!audio) return;
-
-    audio.currentTime = 0;
-    audio.play().catch(() => {
-      console.warn("Sound play blocked");
-    });
+  const playNotificationSound = () => {
+    if (!audioUnlockedRef.current || !audioRef.current) return;
+    
+    audioRef.current.currentTime = 0;
+    audioRef.current.play().catch((e) => console.warn("Playback blocked", e));
   };
 
   useEffect(() => {
@@ -68,16 +40,12 @@ export const useCustomerSocket = () => {
     if (!socket) return;
 
     socket.on("connect", () => {
-      console.log("✅ Socket Connected");
       socket.emit("joinRoom", { type: "Customer" });
     });
 
     socket.on("orderStatusUpdated", (payload) => {
-      console.log("📦 Order Update Received:", payload);
-
-      if (payload?.to_status) {
-        playStatusSound(payload.to_status);
-      }
+      // Play sound for every status update
+      playNotificationSound();
 
       const indianTime = new Date().toLocaleString("en-IN", {
         day: "2-digit",
@@ -87,31 +55,29 @@ export const useCustomerSocket = () => {
         hour12: true,
       });
 
-      dispatch(
-        addNotification({
-          id: Date.now().toString(),
-          title: "Order Update",
-          message: `Order #${payload.order_no.slice(-5)} is now ${payload.to_status}`,
-          status: payload.to_status,
-          time: indianTime,
-          isRead: false,
-        })
-      );
+      dispatch(addNotification({
+        id: Date.now().toString(),
+        title: "Order Update",
+        message: `Order #${payload.order_no.slice(-5)} is now ${payload.to_status}`,
+        status: payload.to_status,
+        time: indianTime,
+        isRead: false,
+      }));
 
-      dispatch(
-        updateOrderStatusInHistory({
-          order_no: payload.order_no,
-          to_status: payload.to_status,
-        })
-      );
+      dispatch(updateOrderStatusInHistory({
+        order_no: payload.order_no,
+        to_status: payload.to_status,
+      }));
     });
 
     return () => {
       socket.off("orderStatusUpdated");
     };
   }, [dispatch]);
-};
 
+  // Hum unlockAudio function return kar rahe hain taaki Component ise use kar sake
+  return { unlockAudio, isAudioUnlocked: audioUnlockedRef };
+};
 
 
 

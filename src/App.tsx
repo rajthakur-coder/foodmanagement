@@ -152,10 +152,7 @@
 
 
 
-
-
-
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useEffect } from "react";
 import { useSelector } from "react-redux";
 import type { RootState } from "./components/app/store";
 
@@ -165,6 +162,9 @@ import ProgressWatcher from "./components/ui/ProgressWatcher";
 import Preloader from "./components/Common/Preloader";
 import { GlobalLoaderProvider } from "./components/ui/GlobalLoader";
 import NetworkStatus from "./pages/Auth/NetworkStatus";
+
+/* ---------------- Socket Hook ---------------- */
+import { useCustomerSocket } from "./services/useCustomerSocket";
 
 /* ---------------- Routes ---------------- */
 const AppRoutes = lazy(() => import("./routes/AppRoutes"));
@@ -200,6 +200,33 @@ const App: React.FC = () => {
   const { isGlobalLoggingOut } = useSelector(
     (state: RootState) => state.auth
   );
+
+  // ✅ Global Socket Initialization
+  // Isse socket har page par connect rahega
+  const { unlockAudio } = useCustomerSocket();
+
+  // ✅ Silent Unlock Logic: Agar user ne pehle kabhi sound enable kiya tha,
+  // toh App level par hi pehla click hote hi audio context unlock ho jayega.
+  useEffect(() => {
+    const hasPref = localStorage.getItem("customer_sound_pref") === "enabled";
+    
+    if (hasPref) {
+      const handleFirstInteraction = () => {
+        unlockAudio();
+        console.log("🔊 Global Audio Unlocked via User Interaction");
+        window.removeEventListener("click", handleFirstInteraction);
+        window.removeEventListener("touchstart", handleFirstInteraction);
+      };
+
+      window.addEventListener("click", handleFirstInteraction);
+      window.addEventListener("touchstart", handleFirstInteraction);
+
+      return () => {
+        window.removeEventListener("click", handleFirstInteraction);
+        window.removeEventListener("touchstart", handleFirstInteraction);
+      };
+    }
+  }, [unlockAudio]);
 
   return (
     <AppThemeProvider>

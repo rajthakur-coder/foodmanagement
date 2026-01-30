@@ -90,7 +90,7 @@ const LayoutWrapper = ({ children }: LayoutWrapperProps) => {
 
     
 
-          <main className="flex-1 mt-16 overflow-auto custom-scrollbar bg-surface-body">
+          <main className="flex-1  bg-surface-body">
           <Outlet />
         </main>
       </div>

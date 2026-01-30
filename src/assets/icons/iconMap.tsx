@@ -1,5 +1,5 @@
 import type { IconType } from "react-icons";
-import { RiHomeLine, RiShoppingBagLine, RiUserLine, RiBriefcase2Fill, RiPencilFill, RiPrinterFill, RiCheckFill, RiSubtractLine, RiSubtractFill, RiEyeCloseFill, RiEyeCloseLine, RiEyeOffLine, RiEyeFill, RiSearchLine, RiLock2Line, RiMailLine, RiArrowLeftLine, RiCornerRightUpFill, RiAddFill, RiKeyFill, RiSettingsLine, RiSendPlane2Line, RiLoader4Line, RiWalletLine, RiRefund2Line, RiInformationLine, RiUserUnfollowLine, RiUserAddLine, RiStopCircleLine, RiDeleteBin2Line, RiTeamFill, RiMoneyRupeeCircleLine, RiAddCircleFill, RiIndeterminateCircleFill, RiGlobalLine, RiFileCopy2Line, RiUser3Line, RiBuilding4Fill, RiPhoneFill, RiCheckDoubleFill, RiFileList3Fill, RiAppsFill, RiShoppingCart2Fill } from "react-icons/ri";
+import { RiHomeLine, RiShoppingBagLine, RiUserLine, RiBriefcase2Fill, RiPencilFill, RiPrinterFill, RiCheckFill, RiSubtractLine, RiSubtractFill, RiEyeCloseFill, RiEyeCloseLine, RiEyeOffLine, RiEyeFill, RiSearchLine, RiLock2Line, RiMailLine, RiArrowLeftLine, RiCornerRightUpFill, RiAddFill, RiKeyFill, RiSettingsLine, RiSendPlane2Line, RiLoader4Line, RiWalletLine, RiRefund2Line, RiInformationLine, RiUserUnfollowLine, RiUserAddLine, RiStopCircleLine, RiDeleteBin2Line, RiTeamFill, RiMoneyRupeeCircleLine, RiAddCircleFill, RiIndeterminateCircleFill, RiGlobalLine, RiFileCopy2Line, RiUser3Line, RiBuilding4Fill, RiPhoneFill, RiCheckDoubleFill, RiFileList3Fill, RiAppsFill, RiShoppingCart2Fill, RiEditLine } from "react-icons/ri";
 import { BiUser, BiChevronRight, BiChevronLeft, BiChevronDown, BiBell, BiBriefcaseAlt2, BiPoll, BiTrash, BiDotsVerticalRounded, BiChevronUp, BiExport, BiImport, BiArrowBack, BiMobile, BiUserCheck, BiShoppingBag, BiSolidBellOff, BiTimeFive, } from "react-icons/bi";
 import { FiCamera, FiRefreshCw, FiX } from "react-icons/fi";
 import { SiBitcoin } from "react-icons/si";
@@ -96,6 +96,7 @@ export const iconMap: Record<string, IconEntry> = {
    "bx bxs-shopping-bag":BiShoppingBag,
    "bx bx-bell-off": BiSolidBellOff,
    "bx bx-time-five": BiTimeFive,
+   "ri-edit-line": RiEditLine,
 
 
 

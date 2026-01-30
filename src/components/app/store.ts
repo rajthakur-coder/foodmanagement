@@ -5,6 +5,7 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import { authApi } from "../../features/auth/authApi";
 import { menuApi } from "../../features/menu/menuApi";
 import { ordersApi } from "../../features/createorder/ordersApi";
+import { paymentApi } from "../../features/payments/paymentApi";
 
 export const store = configureStore({
   reducer: rootReducer,
@@ -13,6 +14,8 @@ export const store = configureStore({
       authApi.middleware,
         menuApi.middleware,
          ordersApi.middleware,
+             paymentApi.middleware   // 👈 ADD
+
 
     ),
   devTools: import.meta.env.MODE !== "production",

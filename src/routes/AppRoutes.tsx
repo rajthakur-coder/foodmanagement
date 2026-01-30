@@ -241,7 +241,7 @@ import RoleHomeRedirect from "./RoleHomeRedirect";
 import Preloader from "../components/Common/Preloader";
 import PageWrapper from "../components/Common/TitleManager";
 import LayoutWrapper from "../components/layout/LayoutWrapper";
-
+import ViewBill from "../pages/User/Menu/ViewBill"
 /* ---------- Lazy Pages ---------- */
 
 const SignInForm = lazy(
@@ -312,6 +312,16 @@ const AppRoutes: React.FC = () => {
           />
 
           <Route element={<RoleBasedRoute allowedRoles={["Guest"]} />}>
+
+          
+          <Route
+            path="/view-bill"
+            element={
+              <PageWrapper title="VIEW BILL">
+                <ViewBill />
+              </PageWrapper>
+            }
+          />
             <Route
               path="/myOrder"
               element={

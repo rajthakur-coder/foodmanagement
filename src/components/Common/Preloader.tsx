@@ -1,7 +1,7 @@
 
 
 import React, { useEffect, useState } from "react";
-import Logo from "../../assets/Images/logosidebar.png";
+import Logo from "../../assets/Images/loaderlogo.png";
 
 type Phase = "intro" | "rotate" | "circle" | "zoom" | "squareLoop";
 

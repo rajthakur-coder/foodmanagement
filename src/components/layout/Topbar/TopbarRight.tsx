@@ -21,7 +21,7 @@ const TopbarRight = () => {
   };
 
   return (
-    <div className="flex items-center gap-5">
+    <div className="flex items-center gap-2">
       <IconButton onClick={toggleFullscreen}>
         {isFullscreen ? <FiMinimize2 /> : <FiMaximize2 />}
       </IconButton>

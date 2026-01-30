@@ -83,9 +83,10 @@ const TopbarNotification: FC = () => {
       {/* DROPDOWN */}
       {isOpen && (
         <div className={clsx(
-          "fixed inset-x-4 top-16 z-[999] mt-1 origin-top-right rounded-2xl border shadow-2xl transition-all",
-          "md:absolute md:right-0 md:left-auto md:w-80 md:inset-x-auto",
-          "bg-white dark:bg-[#1F2937] border-gray-100 dark:border-gray-700"
+          "fixed inset-x-4 top-16 mt-1 origin-top-right rounded-2xl border shadow-2xl transition-all",
+          "md:absolute md:right-0 md:left-auto md:w-80 md:inset-x-auto md:top-full",
+          "bg-white dark:bg-[#1F2937] border-gray-100 dark:border-gray-700",
+          "z-[999]" // Yahan z-index ko high kiya hai taaki ye sticky elements ke upar dikhe
         )}>
           
           <div className="flex items-center justify-between border-b border-gray-100 dark:border-gray-700 px-4 py-3 bg-gray-50/50 dark:bg-gray-800/50 rounded-t-2xl">

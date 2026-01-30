@@ -8,8 +8,8 @@ import SidebarItem from "./SidebarItem";
 import SidebarSubmenu from "./SidebarSubmenu";
 import Icon from "../../ui/Icon";
 import clsx from "clsx";
-import logosidebar from "../../../assets/Images/logosidebar.png"
-import logosidebar1 from "../../../assets/Images/logo1.png"
+import logofevicon from "../../../assets/Images/loaderlogo.png"
+import logo from "../../../assets/Images/logoooo1.png"
 
 
 // -------------------- Types --------------------
@@ -43,25 +43,24 @@ type SidebarHeaderProps = {
 
 // -------------------- Sidebar Header --------------------
 const SidebarHeader = ({ isCollapsed, toggleCollapse }: SidebarHeaderProps) => (
-   <div className="relative flex items-center h-16 px-4">
+   <div className="relative flex items-center h-18 px-4">
 
     {/* 👉 Expanded Sidebar → Full Logo */}
     {!isCollapsed ? (
-       <img
-    src={logosidebar1}
+<img
+    src={logo}
     alt="Logo"
-    width="230"
-    height="40"
-    className="object-contain "
+    style={{ width: '300px', height: 'auto' }} 
+    className="block"
 />
 
     ) : (
         /* 👉 Collapsed Sidebar → Favicon */
        <img
-    src={logosidebar}
+    src={logofevicon}
     alt="Favicon"
-    width="50"
-    height="50"
+    width="54"
+    height="54"
     className="ml-3"
 />
 

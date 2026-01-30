@@ -6,6 +6,7 @@ import { menuApi } from "../../features/menu/menuApi";
 import ordersReducer from "../../features/orders/ordersSlice"
 import { ordersApi } from "../../features/createorder/ordersApi";
 import notificationReducer from "../../features/notification/notificationSlice"; // Path sahi check karein
+import { paymentApi } from "../../features/payments/paymentApi";
  // ✅ import new paymentApi
 
 export const rootReducer = combineReducers({
@@ -17,6 +18,7 @@ export const rootReducer = combineReducers({
 
  [menuApi.reducerPath]: menuApi.reducer,
    [ordersApi.reducerPath]: ordersApi.reducer,
+[paymentApi.reducerPath]: paymentApi.reducer,
 
 
 });
