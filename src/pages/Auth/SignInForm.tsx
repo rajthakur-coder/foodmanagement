@@ -3,10 +3,10 @@ import React, { useState, useEffect } from "react";
 import type { FormEvent, Dispatch, SetStateAction, JSX } from "react";
 import { useNavigate } from "react-router-dom";
 import Checkbox from "../../components/Common/Checkbox";
-import hero from "../../assets/Images/loginHome2.jpeg";
+import hero from "../../assets/Images/homomo.jpeg";
 import InputField from "../../components/Common/inputField";
 import { ToasterUtils } from "../../components/ui/toast";
-import logo from "../../assets/Images/logo1.png";
+import logo from "../../assets/Images/logoooo1.png";
 // import hero3 from "../../assets/login1.jpeg";
 // import hero4 from "../../assets/login4.jpeg";
 import Cookies from "js-cookie";
@@ -941,11 +941,11 @@ const tempUserData = {
                             : ""
                 }
                 style={{ ["--animate-duration" as any]: "0.6s" }}   >
-                <div className="flex sm:justify-center md:justify-center lg:justify-center md:pl-6 ">
+                <div className="flex sm:justify-center md:justify-center justify-center  md:pl-6 pb-4">
                     <img
                         src={logo}
                         alt="Logo"
-                        className="h-auto duration-500 drop-shadow-md ransition-transform hover:scale-105"
+                        className="h-20 duration-500 drop-shadow-md ransition-transform hover:scale-105"
                     />
                 </div>
                 <h2 className="pl-3 mb-5 text-2xl font-semibold text-gray-700 sm:text-2xl text-start md:pl-6 lg:pl-0">
