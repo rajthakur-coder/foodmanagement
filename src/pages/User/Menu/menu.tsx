@@ -1,5 +1,5 @@
 import React from 'react'
-import Menu from '../../../component/menu/menupage'
+import Menu from '../../../component/menu/Menupage'
 
 const menu = () => {
   return (
