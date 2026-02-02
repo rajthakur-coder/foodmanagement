@@ -3,10 +3,10 @@ import React, { useState, useEffect } from "react";
 import type { FormEvent, Dispatch, SetStateAction, JSX } from "react";
 import { useNavigate } from "react-router-dom";
 import Checkbox from "../../components/Common/Checkbox";
-import hero from "../../assets/Images/homomo.jpeg";
+import hero from "../../assets/Images/loginimage.webp";
 import InputField from "../../components/Common/inputField";
 import { ToasterUtils } from "../../components/ui/toast";
-import logo from "../../assets/Images/logoooo1.png";
+import logo from "../../assets/Images/logo.webp";
 // import hero3 from "../../assets/login1.jpeg";
 // import hero4 from "../../assets/login4.jpeg";
 import Cookies from "js-cookie";
@@ -328,7 +328,7 @@ const finalizeLogin = (
 
   // ================= POST LOGIN REDIRECT =================
   const redirectPath =
-    sessionStorage.getItem("post_login_redirect") || "/menu";
+    sessionStorage.getItem("post_login_redirect") || "/";
 
   sessionStorage.removeItem("post_login_redirect");
 
@@ -1259,7 +1259,7 @@ const tempUserData = {
     <div className="relative flex items-center justify-center w-full">
 
         {/* MOBILE */}
-        <div className="w-full px-4 lg:hidden">
+        <div className="w-full px-4 lg:hidden ">
             <div className="w-full max-w-md mx-auto rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.2)]">
                 <div className="rotating-neon-wrapper mobile-neon rounded-2xl">
                     <div className="p-1 bg-white rotating-neon-card rounded-2xl">

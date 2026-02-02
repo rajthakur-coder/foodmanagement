@@ -8,8 +8,8 @@ import SidebarItem from "./SidebarItem";
 import SidebarSubmenu from "./SidebarSubmenu";
 import Icon from "../../ui/Icon";
 import clsx from "clsx";
-import logofevicon from "../../../assets/Images/loaderlogo.png"
-import logo from "../../../assets/Images/logoooo1.png"
+import logofevicon from "../../../assets/Images/loaderlogo.webp"
+import logo from "../../../assets/Images/logo.webp"
 
 
 // -------------------- Types --------------------

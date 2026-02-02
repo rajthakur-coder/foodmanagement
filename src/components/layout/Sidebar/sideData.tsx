@@ -26,12 +26,12 @@ export const sidebarSections = [
         roles: ['Guest',"custom"], // Guest added
       },
 
-          {
-        name: "View Bill",
-        path: "/view-bill",
-        icon: <Icon name="bx bxs-shopping-bag" />,
-        roles: ['Guest',"custom"], // Guest added
-      },
+      //     {
+      //   name: "View Bill",
+      //   path: "/view-bill",
+      //   icon: <Icon name="bx bxs-shopping-bag" />,
+      //   roles: ['Guest',"custom"], // Guest added
+      // },
     ],
   },
 

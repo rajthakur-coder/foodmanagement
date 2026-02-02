@@ -18,9 +18,8 @@ const ViewBillPage: React.FC = () => {
   if (!billData) {
     return (
       <div className={`min-h-screen flex flex-col items-center justify-center p-6 text-center ${isDark ? "bg-[#111827]" : "bg-[#F8F9FA]"}`}>
-        <p className={`${isDark ? "text-gray-400" : "text-gray-500"} mb-4`}>No bill data found. Please try again.</p>
-        <Button text="Go Back" onClick={() => navigate(-1)} />
-      </div>
+        <p className={`${isDark ? "text-gray-400" : "text-gray-500"} mb-4`}>No bill data found. Please Order.</p>
+<Button text="Go Back" onClick={() => navigate("/menu")} />      </div>
     );
   }
 

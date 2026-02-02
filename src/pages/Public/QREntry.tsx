@@ -8,7 +8,7 @@ const QREntry = () => {
   useEffect(() => {
     const restaurantId = params.get("restaurant_id");
     const tableId = params.get("table_id");
-    console.log("QR ENTRY PARAMS", restaurantId, tableId);
+    // console.log("QR ENTRY PARAMS", restaurantId, tableId);
 
 
     if (!restaurantId || !tableId) {

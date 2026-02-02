@@ -15,16 +15,15 @@ export const connectSocket = () => {
     });
 
     socket.on("connect", () => {
-      console.log("✅ Socket connected:", socket?.id);
+      console.log("Socket connected:");
     });
 
     socket.on("connect_error", (err) => {
-      console.error("❌ Socket error:", err.message);
+      console.error("Socket error:", err.message);
     });
   }
 
   return socket;
 };
 
-// ✅ ADD THIS
 export const getSocket = () => socket;

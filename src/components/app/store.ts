@@ -14,8 +14,7 @@ export const store = configureStore({
       authApi.middleware,
         menuApi.middleware,
          ordersApi.middleware,
-             paymentApi.middleware   // 👈 ADD
-
+             paymentApi.middleware   
 
     ),
   devTools: import.meta.env.MODE !== "production",

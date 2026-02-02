@@ -19,9 +19,9 @@ const rawBaseQuery = fetchBaseQuery({
 
 // Enhanced baseQuery with 401 handling (strictly typed)
 export const appBaseQuery: BaseQueryFn<
-  string | FetchArgs,                     // request type
-  unknown,                                // response type
-  FetchBaseQueryError                     // error type
+  string | FetchArgs,                    
+  unknown,                               
+  FetchBaseQueryError                    
 > = async (args, api, extraOptions) => {
   const result = await rawBaseQuery(args, api, extraOptions);
 

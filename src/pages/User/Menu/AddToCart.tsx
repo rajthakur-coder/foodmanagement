@@ -377,8 +377,8 @@ const OrderPage: React.FC = () => {
   
   // 1. Jab user "Place Order" click kare
   const handlePlaceOrderClick = () => {
-    const token = Cookies.get("customertoken");
-    if (!token) {
+    const tokenes = Cookies.get("customertoken");
+    if (!tokenes) {
       sessionStorage.setItem("post_login_redirect", location.pathname);
       navigate("/auth/customer/login", { replace: true });
       return;
@@ -443,22 +443,27 @@ const OrderPage: React.FC = () => {
 
   return (
     <div className="min-h-screen pb-32 p-4 pt-20 bg-surface-card">
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-3">
         <h2 className="text-xl font-bold dark:text-white">Cart</h2>
         {orders.length > 0 && (
           <Button text="Clear All" color="danger" variant="ghost" size="sm" width="auto" onClick={handleClearAll} />
         )}
       </div>
 
-      <div className="lg:flex lg:gap-6">
+      <div className="lg:flex lg:gap-6 px-2">
         {/* ITEMS LIST */}
         <div className="space-y-4 lg:flex-1">
           {orders.map((item) => (
             <div key={item.variantId} className="flex bg-white shadow-sm rounded-2xl dark:bg-gray-900 overflow-hidden border dark:border-gray-800">
-              <img src={item.image || "/placeholder.png"} alt={item.name} className="object-cover w-24 h-24 lg:w-32 lg:h-32" />
+              <img src={item.image || "/placeholder.png"} alt={item.name} className="object-cover w-32 h-28 p-2 lg:w-32 lg:h-32 rounded-3xl" />
               <div className="flex-1 p-3 flex flex-col justify-between">
                 <div className="flex justify-between">
-                  <h5 className="font-bold dark:text-white">{item.name}</h5>
+                     <div>
+                       <h5 className="font-semibold dark:text-white">{item.name}</h5>
+                       <p className="text-sm text-gray-500">
+                         {item.portion === "full" ? "Full Portion" : "Half Portion"}
+                       </p>
+                     </div>
                   <button onClick={() => handleRemove(item.variantId)} className="text-red-500">
                     <Icon name="ri-delete-bin-line" />
                   </button>
@@ -484,7 +489,7 @@ const OrderPage: React.FC = () => {
               <Icon name="ri-edit-line" /> 
               {orderNote ? "Edit Note" : "Add special instruction for kitchen"}
             </button>
-            {orderNote && <p className="text-xs text-gray-500 mt-1 italic">"{orderNote}"</p>}
+            {orderNote && <p className="text-xs text-gray-500 mt-1 italic">{orderNote}</p>}
           </div>
         </div>
 
@@ -510,7 +515,7 @@ const OrderPage: React.FC = () => {
       </div>
 
       {/* MOBILE FOOTER - Fixed at the very bottom */}
-      <div className="fixed bottom-16 left-0 right-0 p-4 bg-white dark:bg-gray-900 border-t dark:border-gray-800 md:hidden z-50 shadow-lg">
+      <div className="fixed bottom-16 left-0 right-0 p-4 m-4 bg-white dark:bg-gray-900 border-t dark:border-gray-800 md:hidden z-50 shadow-lg rounded-2xl">
         <div className="flex justify-between items-center">
           <div>
             <p className="text-xs text-gray-400">Total Price</p>
@@ -520,7 +525,7 @@ const OrderPage: React.FC = () => {
             text="Place Order"
             color="primary"
             size="md"
-            width="160px"
+            width="130px"
             loading={isLoading}
             loaderType="bounce"
             onClick={handlePlaceOrderClick}

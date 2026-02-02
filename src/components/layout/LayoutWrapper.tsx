@@ -15,7 +15,7 @@ interface LayoutWrapperProps {
 
 const LayoutWrapper = ({ children }: LayoutWrapperProps) => {
   const location = useLocation();
-  const hideLayoutPaths = ["/auth/login", "/restaurant-onboarding"];
+  const hideLayoutPaths = ["/auth/customer/login", "/restaurant-onboarding"];
   const hideLayout = hideLayoutPaths.includes(location.pathname);
 
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);

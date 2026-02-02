@@ -5,13 +5,12 @@ import { authApi } from "../../features/auth/authApi";
 import { menuApi } from "../../features/menu/menuApi";
 import ordersReducer from "../../features/orders/ordersSlice"
 import { ordersApi } from "../../features/createorder/ordersApi";
-import notificationReducer from "../../features/notification/notificationSlice"; // Path sahi check karein
+import notificationReducer from "../../features/notification/notificationSlice"; 
 import { paymentApi } from "../../features/payments/paymentApi";
- // ✅ import new paymentApi
 
 export const rootReducer = combineReducers({
-    orders: ordersReducer, // ✅ IMPORTANT
-    notifications: notificationReducer, // <--- Is line ki wajah se 'unreadCount' undefined aa raha tha
+    orders: ordersReducer, 
+    notifications: notificationReducer, 
 
   auth: authReducer,
   [authApi.reducerPath]: authApi.reducer,
